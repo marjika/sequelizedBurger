@@ -16,7 +16,7 @@
         <img src="/assets/img/hamburger-icon.png" class="img-fluid" alt="Hamburger">
     </div>
     <div id="formArea">
-        <h4>Enter a burger you want to eat. Click the submit button.</h4>
+        <h4>Enter a burger you want to eat.<br>Click the submit button.</h4>
         <form class="create-form">
             <div class="form-group">
                 <input type="text" id="burgs" name="burger_name">
@@ -24,13 +24,18 @@
             <button type="submit">Submit</button>
         </form>
     </div>
+    <br>
+    <div id="hrefButton">
+        <a class="btn btn-lg" href="/customers" role="button" style="max-width:50%; margin-left:2%; color:black">Manage Customers</a>
+    </div>
 </div>
 
 <div class="col-sm-4">
     <div id="eaten">
         {{#each burgers}}
             {{#if devoured}} 
-                <p>{{this.id}}. {{this.burgerName}}</p>
+                <p>{{this.id}}. {{this.burgerName}}
+                <button class="deleteBurger" data-id="{{id}}">Delete this Burger</button></p>
             {{/if}}
         {{/each}} 
     </div>
@@ -53,8 +58,17 @@
                     console.log("changed devoured to true");
                     // Reload the page to get the updated list
                     location.reload();
-                }
-            );
+                });
+        });
+        $(".deleteBurger").on("click", function() {
+            var id = $(this).data("id");
+            $.ajax({
+            method: "DELETE",
+            url: "/api/burgers/" + id
+            })
+            .then(function() {
+                    location.reload();
+                });
         });
         //When user submits a new burger, it is added to the database with devoured=false
         $(".create-form").on("submit", function(event) {

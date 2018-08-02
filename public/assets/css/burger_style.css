@@ -68,6 +68,15 @@ button {
     color: black;
 }
 
+label {
+    font-size: 22px;
+}
+
+textarea {
+    border: 3px solid black;
+    border-radius: 4px;
+}
+
 input[type=text] {
     border: 3px solid black;
     border-radius: 4px;
@@ -76,4 +85,20 @@ input[type=text] {
 body, html {
     height: 100%;
     margin: 0;
+}
+
+#hrefButton {
+    display: block;
+    background: #ffb84d;
+    text-align: center;
+    border-radius: 12px;
+    border: 2px solid black;
+    cursor: pointer;
+    color: black;
+    font-weight: bold;
+}
+
+#form-group {
+    max-width: 80%;
+    margin-left: 3%;
 }

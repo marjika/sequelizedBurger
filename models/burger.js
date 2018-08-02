@@ -17,5 +17,13 @@ module.exports = function(sequelize, DataTypes) {
         defaultValue: false
       }
     });
+
+    Burger.associate = function(models) {
+      // Associating Burger with customers
+      // When a Burger is deleted, also delete any associated customers
+      Burger.hasMany(models.Customer, {
+        onDelete: "cascade"
+      });
+    };
     return Burger;
   };

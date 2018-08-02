@@ -1,0 +1,83 @@
+<div class="row">
+    <h1>Eat-da-Burger<br>Customer Manager</h1>
+</div>
+
+<div class="row">
+
+    <div class="col-sm-6" >
+            <form id="customerForm">
+            <div class="form-group" id="form-group">
+                <label for="customer">Customer</label>
+                <input placeholder="Customer Name" type="text" class="form-control" id="custName">
+                <br />
+                <label for="toppings">Favorite Toppings:</label>
+                <textarea placeholder="Toppings" class="form-control" rows="4" id="toppings"></textarea>
+                <br />
+                <div class="form-group">
+                <label for="category">Select Customer's Favorite Burger:</label>
+                <select class="custom-select" id="fave">
+                    <option value="0">Choose favorite burger</option>
+                    {{#each customers}}
+                        <option value="{{this.id}}">{{this.id}}. {{this.burgerName}}</option>
+                    {{/each}}
+                </select>
+                </div>
+                <br />
+                <button type="submit">Submit</button>
+            </div>
+            </form>
+    </div>
+    <div class="col-sm-6">
+        <div id="uneaten" style="max-width:75%">
+            {{#each customers}}
+                {{#if this.Customers}}
+                    <h4>{{this.burgerName}}</h4>
+                {{/if}}
+                {{#each this.Customers}}
+                    {{#if this.firstName}}
+                        <p style="margin-left: 20%">{{this.firstName}} has it with {{this.toppings}}</p>
+                    {{/if}}
+                {{/each}}
+            {{/each}}
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div id="hrefButton" style="max-width:20%; margin-left:40%">
+        <a class="btn btn-lg" href="/" role="button" style="color:black">Eat-da-Burger</a>
+    </div>
+</div>
+
+<script>
+    $(function() {
+        //When user submits a new burger, it is added to the database with devoured=false
+        $("#customerForm").on("submit", function(event) {
+            event.preventDefault();
+            if (!($("#custName").val().trim()) || !($("#toppings").val().trim()) || !($("#fave").val())) {
+                return;
+            }
+            else {
+                var newCustomer = {
+                    firstName: $("#custName").val().trim(),
+                    toppings: $("#toppings").val().trim(),
+                    BurgerId: $("#fave").val()
+                }
+                console.log(newCustomer);
+                // Send the POST request.
+                $.ajax("/api/customers", {
+                    type: "POST",
+                    data: newCustomer
+                }).then(
+                    function() {
+                        console.log("created new customer");
+                        // Reload the page to get the updated list
+                        location.reload();
+                    }
+                );
+            }
+        });
+
+
+    });
+</script>
