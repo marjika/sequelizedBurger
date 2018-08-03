@@ -2,10 +2,7 @@ module.exports = function(sequelize, DataTypes) {
     var Customer = sequelize.define("Customer", {
       firstName: {
         type: DataTypes.STRING,
-        // AllowNull is a flag that restricts a burger from being entered if it doesn't
-        // have a text value
         allowNull: false,
-        // len is a validation that checks that our burger is between 1 and 50 characters
         validate: {
           len: [1, 50]
         }

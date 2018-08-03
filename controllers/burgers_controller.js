@@ -2,7 +2,6 @@
 var db = require("../models");
 
 // Routes
-// =============================================================
 module.exports = function(app) {
 
   // GET route for getting all of the burgers
@@ -15,6 +14,7 @@ module.exports = function(app) {
     });
   });
 
+  //GET route for getting customer page
   app.get("/customers", function(req, res) {
     db.Burger.findAll({
       include: [db.Customer]
@@ -23,17 +23,7 @@ module.exports = function(app) {
         customers: joinData
       };
       res.render("customerManager", myObject);
-      // console.log(res.json(myObject.customers));
-    });
-    // var myObject, burgObj;
-
-    // db.Burger.findAll({}).then(function(dbBurger) {
-    //   burgObj = {
-    //       burgers: dbBurger
-    //     }
-    //   });
-    //   res.render("customerManager", myObject, burgObj);
-      
+    });      
   });
 
 
@@ -43,7 +33,6 @@ module.exports = function(app) {
       burgerName: req.body.burgerName,
       devoured: req.body.devoured
     }).then(function(dbBurger) {
-      // We have access to the new todo as an argument inside of the callback function
       res.json(dbBurger);
     })
       .catch(function(err) {
@@ -51,14 +40,11 @@ module.exports = function(app) {
       });
   });
 
+  //POST route for creating a new customer
   app.post("/api/customers", function(req, res) {
     db.Customer.create(
       req.body
-      // {
-      //   include: [ db.Burger ]
-      // }
     ).then(function(dbCustomer) {
-      // We have access to the new todo as an argument inside of the callback function
       res.json(dbCustomer);
     })
       .catch(function(err) {
@@ -66,10 +52,8 @@ module.exports = function(app) {
       });
   });
 
-  // DELETE route for deleting todos. We can get the id of the todo to be deleted from
-  // req.params.id
+  // DELETE route for deleting a specific burger by id
   app.delete("/api/burgers/:id", function(req, res) {
-    // We just have to specify which todo we want to destroy with "where"
     db.Burger.destroy({
       where: {
         id: req.params.id
@@ -80,7 +64,7 @@ module.exports = function(app) {
 
   });
 
-  // PUT route for updating todos. We can get the updated todo data from req.body
+  // PUT route for updating burger, specifically changing the boolean 'devoured'
   app.put("/api/burgers/:id", function(req, res) {
     db.Burger.update({
       devoured: req.body.devoured

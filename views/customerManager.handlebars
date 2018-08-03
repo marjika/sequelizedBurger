@@ -51,7 +51,7 @@
 
 <script>
     $(function() {
-        //When user submits a new burger, it is added to the database with devoured=false
+        //Customer submission form/fuction with post route
         $("#customerForm").on("submit", function(event) {
             event.preventDefault();
             if (!($("#custName").val().trim()) || !($("#toppings").val().trim()) || !($("#fave").val())) {
@@ -63,15 +63,11 @@
                     toppings: $("#toppings").val().trim(),
                     BurgerId: $("#fave").val()
                 }
-                console.log(newCustomer);
-                // Send the POST request.
                 $.ajax("/api/customers", {
                     type: "POST",
                     data: newCustomer
                 }).then(
                     function() {
-                        console.log("created new customer");
-                        // Reload the page to get the updated list
                         location.reload();
                     }
                 );

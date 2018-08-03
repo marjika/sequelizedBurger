@@ -25,8 +25,8 @@
         </form>
     </div>
     <br>
-    <div id="hrefButton">
-        <a class="btn btn-lg" href="/customers" role="button" style="max-width:50%; margin-left:2%; color:black">Manage Customers</a>
+    <div id="hrefButton"  style="max-width:50%; margin-left:25%">
+        <a class="btn btn-lg" href="/customers" role="button" style="color:black">Manage Customers</a>
     </div>
 </div>
 
@@ -49,17 +49,16 @@
             var changedDevoured = {
                 devoured: true
                 };
-            // Send the PUT request.
+            // Send the PUT request to change the 'devoured' boolean
             $.ajax("/api/burgers/" + id, {
                 type: "PUT",
                 data: changedDevoured
             }).then(
                 function() {
-                    console.log("changed devoured to true");
-                    // Reload the page to get the updated list
                     location.reload();
                 });
         });
+        //Delete function for burger by id
         $(".deleteBurger").on("click", function() {
             var id = $(this).data("id");
             $.ajax({
@@ -87,8 +86,6 @@
                     data: newBurger
                 }).then(
                     function() {
-                        console.log("created new burger");
-                        // Reload the page to get the updated list
                         location.reload();
                     }
                 );
