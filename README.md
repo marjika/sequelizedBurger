@@ -26,5 +26,5 @@ This application is a simple version of the MVC, or model-view-controller patter
 
 ##### About this Application
 
-This repository is for a full stack JavaScript application, employing various technologies, including NPM packages (Express, Body Parser, Mysql2, Sequelize and Sequelize-cli), Handlebars templating, database handling, and styling with CSS. 
+Sequelized Burger is deployed at: https://evening-lowlands-50069.herokuapp.com/. This repository is for a full stack JavaScript application, employing various technologies, including NPM packages (Express, Body Parser, Mysql2, Sequelize and Sequelize-cli), Handlebars templating, database handling, and styling with CSS. 
 The application allows the client to interact with a server to submit and update data.  The burger data displays differently depending on its value in the 'devoured' column.  The user can easily add data to a burger table and a customer table. The application employs a simple client/server full-stack approach, with a front end (HTML-Handlebars, CSS), middleware (Express, Body-parser) and back end (ORM, models).  This project was created and is maintained by me, Marjika Howarth.
